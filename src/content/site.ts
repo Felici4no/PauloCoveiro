@@ -1,93 +1,78 @@
-// Todo o conteúdo do site fica aqui. Edite este arquivo para atualizar textos,
-// trabalhos e contatos — os componentes não precisam ser alterados.
-// Itens marcados com [editar] são textos provisórios.
+import type { StaticImageData } from "next/image";
+import retratoCapa from "@/assets/images/paulo-coveiro-retrato-capa.webp";
+import palcoSentado from "@/assets/images/paulo-coveiro-palco-sentado.webp";
 
-export type WorkType =
-  | "Álbum"
-  | "EP"
-  | "Single"
-  | "Videoclipe"
-  | "Trilha sonora"
-  | "Ao vivo";
+/**
+ * Identidade, textos gerais e contato.
+ *
+ * REVISAR (editorial): todos os textos marcados com `// REVISAR` são
+ * provisórios, transcritos do portfólio em PDF. Paulo vai trabalhar a versão
+ * final com profissionais de letras — substitua aqui, sem tocar no layout.
+ *
+ * IMAGENS PROVISÓRIAS: as fotos em src/assets/images são recortes em baixa
+ * resolução do PDF. Substitua pelos arquivos originais mantendo o nome.
+ */
 
-export type Work = {
-  slug: string;
-  title: string;
-  type: WorkType;
-  year: number;
-  description: string;
-  /** Caminho em /public (ex.: "/trabalhos/capa.jpg"). Sem capa, usa um bloco neutro. */
-  cover?: string;
-  /** Link principal (Spotify, YouTube, Bandcamp...). */
-  url?: string;
-  /** URL de incorporação (embed) do YouTube, Spotify ou SoundCloud. */
-  embed?: string;
-  credits?: string[];
+/** Domínio definitivo ainda não definido — configure NEXT_PUBLIC_SITE_URL. */
+export const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://paulocoveiro.com"
+).replace(/\/$/, "");
+
+export const person = {
+  name: "Paulo Coveiro",
+  /** Taxonomia da capa. Ordem = ordem de exibição. */
+  disciplines: ["Ator", "Cantor", "Educador de teatro"],
+  /** Usado em <title> e no schema Person. */
+  jobTitles: ["Ator", "Cantor", "Educador de teatro"],
+  city: "Guarulhos",
+  region: "SP",
+  country: "BR",
+  email: "orievocoluap@gmail.com",
+  portrait: {
+    src: retratoCapa,
+    alt: "Paulo Coveiro, de camiseta cinza, olhando para o alto; acima dele, sua própria imagem invertida sobre fundo amarelo",
+  },
+  /**
+   * Perfis oficiais. Alimentam o `sameAs` do schema Person e o contato.
+   * Adicione Instagram, IMDb, Spotify, Letterboxd etc. quando confirmados.
+   */
+  profiles: [
+    { label: "YouTube", url: "https://www.youtube.com/@paulocoveiro" },
+  ],
+  /** Assinatura manuscrita (SVG/PNG transparente). Ainda não fornecida. */
+  signature: null as StaticImageData | null,
 };
 
-export type SocialLink = { label: string; url: string };
+export const seo = {
+  title: "Paulo Coveiro — ator, cantor e educador de teatro",
+  // REVISAR
+  description:
+    "Arquivo de Paulo Coveiro, ator, cantor e educador de teatro de Guarulhos (SP). Cinema, teatro e música: Neo-Brazyl, Guardiões da Providência, Pão Doce, Oblíqu0 e apresentações ao vivo.",
+};
 
-export const site = {
-  name: "Paulo Coveiro",
-  role: "Músico · Compositor · Audiovisual",
-  tagline: "[editar] Uma frase curta que resume o seu som e o seu trabalho.",
-  location: "[editar] Cidade, Estado",
-  url: "https://paulocoveiro.com",
+export const hero = {
+  // REVISAR — frase de abertura, extraída do texto de apresentação do PDF.
+  line: "Uso minha carne para contar histórias.",
+};
 
-  about: {
-    paragraphs: [
-      "[editar] Primeiro parágrafo da bio: quem você é, de onde vem e como começou na música.",
-      "[editar] Segundo parágrafo: influências, linguagem sonora, parcerias e trabalhos com audiovisual.",
-      "[editar] Terceiro parágrafo (opcional): momento atual, próximos lançamentos ou shows.",
-    ],
-    /** Caminho em /public. Deixe vazio para esconder a foto. */
-    photo: "",
-    highlights: [
-      { label: "Lançamentos", value: "[editar]" },
-      { label: "Em atividade desde", value: "[editar]" },
-      { label: "Base", value: "[editar]" },
-    ],
+export const about = {
+  photo: {
+    src: palcoSentado,
+    alt: "Paulo Coveiro sentado no chão de um palco escuro, diante de uma porta azul",
   },
+  // REVISAR — texto provisório do portfólio em PDF.
+  paragraphs: [
+    "Uso minha carne para contar histórias e faço isso profissionalmente há 5 anos. Realizei a maior parte dos trabalhos até hoje em Guarulhos, território onde nasci.",
+    "Aos 27 anos, foco minha atuação nos palcos como educador de teatro, ator e cantor.",
+  ],
+};
 
-  works: [
-    {
-      slug: "album-exemplo",
-      title: "[editar] Título do álbum",
-      type: "Álbum",
-      year: 2026,
-      description: "[editar] Uma ou duas frases sobre o disco.",
-      credits: ["Composição e voz: Paulo Coveiro"],
-    },
-    {
-      slug: "single-exemplo",
-      title: "[editar] Título do single",
-      type: "Single",
-      year: 2025,
-      description: "[editar] Sobre a faixa.",
-    },
-    {
-      slug: "clipe-exemplo",
-      title: "[editar] Título do videoclipe",
-      type: "Videoclipe",
-      year: 2025,
-      description: "[editar] Direção, conceito, onde foi gravado.",
-    },
-    {
-      slug: "trilha-exemplo",
-      title: "[editar] Trilha para curta",
-      type: "Trilha sonora",
-      year: 2024,
-      description: "[editar] Para qual filme/projeto e qual foi o seu papel.",
-    },
-  ] satisfies Work[] as Work[],
+export const contact = {
+  heading: "Vamos conversar.",
+  // REVISAR
+  note: "Cinema, teatro, música, oficinas e convites.",
+};
 
-  contact: {
-    email: "contato@paulocoveiro.com",
-    note: "[editar] Para shows, trilhas, parcerias e imprensa.",
-    socials: [
-      { label: "Instagram", url: "https://instagram.com/" },
-      { label: "YouTube", url: "https://youtube.com/" },
-      { label: "Spotify", url: "https://open.spotify.com/" },
-    ] satisfies SocialLink[] as SocialLink[],
-  },
+export const credits = {
+  studio: "The Canteiro",
 };
